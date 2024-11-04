@@ -1,0 +1,58 @@
+TAP version 14
+# Subtest: gql-rule
+    # Subtest: Trigger depth limit rule.
+        not ok 1 - Cannot read properties of undefined (reading 'length')
+          ---
+          stack: |
+            Test.<anonymous> (test/routes/gql-rule.test.js:39:17)
+          at:
+            fileName: test/routes/gql-rule.test.js
+            lineNumber: 39
+            columnNumber: 17
+            typeName: Test
+            methodName: <anonymous>
+            functionName: Test.<anonymous>
+          type: TypeError
+          tapCaught: returnedPromiseRejection
+          source: |2
+                });
+          
+                t.ok(errors.length === 1);
+            ----------------^
+                const message = errors[0].message;
+                // Error message from graphql-depth-limit package
+          ...
+        
+        1..1
+    not ok 1 - Trigger depth limit rule. # time=35.221ms
+      ---
+      at:
+        fileName: test/routes/gql-rule.test.js
+        lineNumber: 8
+        columnNumber: 11
+        typeName: Test
+      source: |2
+          const app = await build(t);
+      
+          await t.test('Trigger depth limit rule.', async (t) => {
+        ----------^
+            const { body: user1 } = await createUser(app);
+      ...
+    
+    1..1
+not ok 1 - gql-rule # time=420.641ms
+  ---
+  at:
+    fileName: test/routes/gql-rule.test.js
+    lineNumber: 5
+    columnNumber: 7
+    isToplevel: true
+  source: |
+    import { createUser, gqlQuery, subscribeTo } from '../utils/requests.js';
+  
+    await test('gql-rule', async (t) => {
+    ------^
+      const app = await build(t);
+  ...
+
+1..1

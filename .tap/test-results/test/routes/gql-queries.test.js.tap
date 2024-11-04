@@ -1,0 +1,221 @@
+TAP version 14
+# Subtest: gql-queries
+    # Subtest: Get all resources.
+        not ok 1 - Cannot read properties of null (reading 'memberTypes')
+          ---
+          stack: |
+            Test.<anonymous> (test/routes/gql-queries.test.js:57:15)
+          at:
+            fileName: test/routes/gql-queries.test.js
+            lineNumber: 57
+            columnNumber: 15
+            typeName: Test
+            methodName: <anonymous>
+            functionName: Test.<anonymous>
+          type: TypeError
+          tapCaught: returnedPromiseRejection
+          source: |2
+                });
+          
+                t.ok(data.memberTypes.length === memberTypes.length);
+            --------------^
+                t.ok(data.posts.length === posts.length);
+                t.ok(data.users.length === users.length);
+          ...
+        
+        1..1
+    not ok 1 - Get all resources. # time=57.235ms
+      ---
+      at:
+        fileName: test/routes/gql-queries.test.js
+        lineNumber: 20
+        columnNumber: 11
+        typeName: Test
+      source: |2
+          const app = await build(t);
+      
+          await t.test('Get all resources.', async (t) => {
+        ----------^
+            const { body: user1 } = await createUser(app);
+            await createPost(app, user1.id);
+      ...
+    
+    # Subtest: Get all resources by their id.
+        not ok 1 - Cannot read properties of null (reading 'id')
+          ---
+          stack: |
+            Test.<anonymous> (test/routes/gql-queries.test.js:101:26)
+          at:
+            fileName: test/routes/gql-queries.test.js
+            lineNumber: 101
+            columnNumber: 26
+            typeName: Test
+            methodName: <anonymous>
+            functionName: Test.<anonymous>
+          type: TypeError
+          tapCaught: returnedPromiseRejection
+          source: |2
+                });
+          
+                t.ok(data.memberType.id === MemberTypeId.BASIC);
+            -------------------------^
+                t.ok(data.post.id === post1.id);
+                t.ok(data.user.id === user1.id);
+          ...
+        
+        1..1
+    not ok 2 - Get all resources by their id. # time=12.156ms
+      ---
+      at:
+        fileName: test/routes/gql-queries.test.js
+        lineNumber: 63
+        columnNumber: 11
+        typeName: Test
+      source: |2
+          });
+      
+          await t.test('Get all resources by their id.', async (t) => {
+        ----------^
+            const { body: user1 } = await createUser(app);
+            const { body: post1 } = await createPost(app, user1.id);
+      ...
+    
+    # Subtest: Get non-existent resources by their id.
+        ok 1 - should be equal
+        ok 2 - should be equal
+        ok 3 - should be equal
+        ok 4 - should be equal
+        not ok 5 - Cannot read properties of null (reading 'profile')
+          ---
+          stack: |
+            Test.<anonymous> (test/routes/gql-queries.test.js:142:35)
+          at:
+            fileName: test/routes/gql-queries.test.js
+            lineNumber: 142
+            columnNumber: 35
+            typeName: Test
+            methodName: <anonymous>
+            functionName: Test.<anonymous>
+          type: TypeError
+          tapCaught: returnedPromiseRejection
+          source: |2
+                t.ok(data.profile === null);
+                t.ok(data.user === null);
+                t.ok(data.userWithNullProfile.profile === null);
+            ----------------------------------^
+              });
+          ...
+        
+        1..5
+    not ok 3 - Get non-existent resources by their id. # time=5.89ms
+      ---
+      at:
+        fileName: test/routes/gql-queries.test.js
+        lineNumber: 107
+        columnNumber: 11
+        typeName: Test
+      source: |2
+          });
+      
+          await t.test('Get non-existent resources by their id.', async (t) => {
+        ----------^
+            const { body: user1 } = await createUser(app);
+      ...
+    
+    # Subtest: Get user/users with his/their posts, profile, memberType.
+        not ok 1 - Cannot read properties of null (reading 'id')
+          ---
+          stack: |
+            Test.<anonymous> (test/routes/gql-queries.test.js:190:24)
+          at:
+            fileName: test/routes/gql-queries.test.js
+            lineNumber: 190
+            columnNumber: 24
+            typeName: Test
+            methodName: <anonymous>
+            functionName: Test.<anonymous>
+          type: TypeError
+          tapCaught: returnedPromiseRejection
+          source: |2
+                });
+          
+                t.ok(dataUser.user.id === user1.id);
+            -----------------------^
+                t.ok(dataUser.user.profile.id === profile1.id);
+                t.ok(dataUser.user.profile.memberType?.id === MemberTypeId.BASIC);
+          ...
+        
+        1..1
+    not ok 4 - Get user/users with his/their posts, profile, memberType. # time=7.472ms
+      ---
+      at:
+        fileName: test/routes/gql-queries.test.js
+        lineNumber: 145
+        columnNumber: 11
+        typeName: Test
+      source: >2
+          });
+      
+          await t.test('Get user/users with his/their posts, profile, memberType.', async (t) => {
+        ----------^
+            const { body: user1 } = await createUser(app);
+            const { body: post1 } = await createPost(app, user1.id);
+      ...
+    
+    # Subtest: Get user by id with his subs.
+        not ok 1 - Cannot read properties of null (reading 'userSubscribedTo')
+          ---
+          stack: |
+            Test.<anonymous> (test/routes/gql-queries.test.js:234:20)
+          at:
+            fileName: test/routes/gql-queries.test.js
+            lineNumber: 234
+            columnNumber: 20
+            typeName: Test
+            methodName: <anonymous>
+            functionName: Test.<anonymous>
+          type: TypeError
+          tapCaught: returnedPromiseRejection
+          source: |2
+                });
+          
+                t.ok(data.user.userSubscribedTo[0].id === user2.id);
+            -------------------^
+                t.ok(data.user.userSubscribedTo[0].name === user2.name);
+                t.ok(data.user.userSubscribedTo[0].subscribedToUser[0].id === user1.id);
+          ...
+        
+        1..1
+    not ok 5 - Get user by id with his subs. # time=8.739ms
+      ---
+      at:
+        fileName: test/routes/gql-queries.test.js
+        lineNumber: 199
+        columnNumber: 11
+        typeName: Test
+      source: |2
+          });
+      
+          await t.test(`Get user by id with his subs.`, async (t) => {
+        ----------^
+            const { body: user1 } = await createUser(app);
+            const { body: user2 } = await createUser(app);
+      ...
+    
+    1..5
+not ok 1 - gql-queries # time=575.288ms
+  ---
+  at:
+    fileName: test/routes/gql-queries.test.js
+    lineNumber: 17
+    columnNumber: 7
+    isToplevel: true
+  source: |
+    import { MemberTypeId } from '../../src/routes/member-types/schemas.js';
+  
+    await test('gql-queries', async (t) => {
+    ------^
+      const app = await build(t);
+  ...
+
+1..1
